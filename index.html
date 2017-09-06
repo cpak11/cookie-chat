@@ -1,19 +1,29 @@
 <!DOCTYPE HTML>
 <html ng-app="chatroom">
   <head>
+
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body ng-controller="mainCtrl">
     <div class="main-container">
-      <h1> DevMountain Chat Room </h1>
+      <h1> DevMountain <small>Chat Room</small> </h1>
       <form ng-submit="postMessage(message)">
         <input class="form-control text-box" type="text" ng-model="message" placeholder="Message">
+        <input class="form-control text-box" type="text" ng-model="filt" placeholder="Filter Message">
+
+        <select ng-model="ssort" class="form-control text-box">
+          <option value="" selected disabled>Sort By...</option>
+          <option value="+createdAt">Asc</option>
+          <option value="-createdAt">Desc</option>
+        </select>
+
       </form>
       <div class="messages-container">
-        <p ng-repeat="message in messages ">
-          {{message.message}} </p>
+        <p ng-repeat="message in messages | filter: filt | orderBy: ssort">
+          {{message.message}} | <span class="stylemedates">{{message.createdAt | date:'short'}}</span>
+        </p>
       </div>
     </div>
 
