@@ -10,18 +10,19 @@
     <div class="main-container">
       <h1> DevMountain <small>Chat Room</small> </h1>
       <form ng-submit="postMessage(message)">
-        <input class="form-control text-box" type="text" ng-model="message" placeholder="Message">
-        <input class="form-control text-box" type="text" ng-model="filt" placeholder="Filter Message">
-
-        <select ng-model="ssort" class="form-control text-box">
-          <option value="" selected disabled>Sort By...</option>
-          <option value="+createdAt">Asc</option>
-          <option value="-createdAt">Desc</option>
-        </select>
-
+          <input class="form-control text-box" type="text" ng-model="message" placeholder="Message">
       </form>
+
+      <input class="form-control text-box" type="text" ng-model="filt" placeholder="Filter Message">
+
+      <select ng-model="timestamp" class="form-control text-box">
+        <option value="" selected disabled>Sort By...</option>
+        <option value="+createdAt">Asc</option>
+        <option value="-createdAt">Desc</option>
+      </select>
+
       <div class="messages-container">
-        <p ng-repeat="message in messages | filter: filt | orderBy: ssort">
+        <p ng-repeat="message in messages | filter: filt | orderBy: timestamp">
           {{message.message}} | <span class="stylemedates">{{message.createdAt | date:'short'}}</span>
         </p>
       </div>
